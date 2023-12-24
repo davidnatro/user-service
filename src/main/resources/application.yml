@@ -16,6 +16,11 @@ spring:
           auth: true
           starttls:
             enable: true
+application:
+  keycloak:
+
+
+    server-url: http://localhost:9090
 
 
 management:

@@ -1,3 +1,6 @@
 package servicetemplate.userservice.service;
 
-public interface UserService { }
+public interface UserService {
+
+
+}
