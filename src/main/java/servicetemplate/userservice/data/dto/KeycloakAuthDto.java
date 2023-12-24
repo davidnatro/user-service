@@ -22,7 +22,7 @@ public class KeycloakAuthDto {
   private String username;
 
   @FormProperty("password")
-  private StringBuilder password;
+  private String password;
 
   @FormProperty("grant_type")
   private String grantType;

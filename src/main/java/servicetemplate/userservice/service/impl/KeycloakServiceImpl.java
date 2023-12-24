@@ -1,6 +1,5 @@
 package servicetemplate.userservice.service.impl;
 
-import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.OAuth2Constants;
@@ -26,15 +25,11 @@ public class KeycloakServiceImpl implements KeycloakService {
   public AccessTokenModel authenticate(AuthDto authDto) {
     KeycloakAuthDto keycloakAuthDto = new KeycloakAuthDto(keycloakProperty.getClientId(),
                                                           keycloakProperty.getClientSecret(),
-                                                          authDto.username(),
-                                                          new StringBuilder().append(
-                                                              authDto.password()),
+                                                          authDto.username(), authDto.password(),
                                                           OAuth2Constants.PASSWORD);
 
     try {
-      AccessTokenModel tokenModel = keycloakClient.authenticate(keycloakAuthDto);
-      Arrays.fill(authDto.password(), '\0');
-      return tokenModel;
+      return keycloakClient.authenticate(keycloakAuthDto);
     } catch (Exception exception) {
       log.error("User '{}' authentication failed: '{}'", authDto.username(),
                 exception.getMessage());
