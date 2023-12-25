@@ -20,5 +20,4 @@ public class RabbitProperty {
   private Integer prefetchCount;
   private Integer consumersPerQueue;
   private String registrationRequestsQueue;
-  private String registrationRequestsRoutingKey;
 }

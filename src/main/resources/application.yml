@@ -8,7 +8,7 @@ spring:
     name: user-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
     hikari:
@@ -27,15 +27,15 @@ spring:
     password: rabbit
     port: 5672
     virtual-host: vh
-    exchange: ex
+    exchange: user-service
     prefetch-count: 1
     consumers-per-queue: 5
-    registration-requests-queue: q
-    registration-requests-routing-key: rk
+    registration-requests-queue: registration-requests
 
   mail:
     host: smtp.gmail.com
     port: 587
+
 
     properties:
       mail:

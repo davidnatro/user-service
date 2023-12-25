@@ -1,9 +1,11 @@
 package servicetemplate.userservice.controller.advice;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
+import org.springframework.core.serializer.support.SerializationFailedException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -37,5 +39,13 @@ public class CommonExceptionAdvice {
       AlreadyExistsException exception) {
     return ResponseEntity.status(CONFLICT)
         .body(new ExceptionModel(exception.getMessage(), CONFLICT.toString()));
+  }
+
+  @ResponseStatus(BAD_REQUEST)
+  @ExceptionHandler(SerializationFailedException.class)
+  public ResponseEntity<ExceptionModel> handleSerializationFailedException(
+      SerializationFailedException exception) {
+    return ResponseEntity.status(BAD_REQUEST)
+        .body(new ExceptionModel(exception.getMessage(), BAD_REQUEST.toString()));
   }
 }

@@ -15,5 +15,5 @@ public interface UserService {
 
   void createRegistrationRequest(RegistrationDto registrationDto);
 
-  UserModel processRegistration(RegistrationDto registrationDto);
+  void processRegistration(RegistrationDto registrationDto);
 }

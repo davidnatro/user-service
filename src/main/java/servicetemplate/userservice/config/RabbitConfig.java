@@ -33,7 +33,7 @@ public class RabbitConfig {
 
   @Bean
   public Queue registrationRequestsQueue() {
-    return QueueBuilder.durable()
+    return QueueBuilder.durable(property.getRegistrationRequestsQueue())
         .deadLetterRoutingKey(property.getRegistrationRequestsQueue() + "-dlq")
         .deadLetterExchange(property.getExchange())
         .build();
@@ -50,7 +50,7 @@ public class RabbitConfig {
                                                   Queue registrationRequestsQueue) {
     return BindingBuilder.bind(registrationRequestsQueue)
         .to(directExchange)
-        .with(property.getRegistrationRequestsRoutingKey());
+        .with(property.getRegistrationRequestsQueue());
   }
 
   @Bean
