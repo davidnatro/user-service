@@ -13,5 +13,15 @@ public class KeycloakProperty {
 
   private String clientId;
   private String serverUrl;
+  private String realm;
   private String clientSecret;
+  private Admin admin;
+
+  @Getter
+  @Setter
+  public static class Admin {
+
+    private String username;
+    private String password;
+  }
 }

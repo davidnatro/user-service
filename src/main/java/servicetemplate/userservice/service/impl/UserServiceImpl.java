@@ -3,15 +3,18 @@ package servicetemplate.userservice.service.impl;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.keycloak.admin.client.Keycloak;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.serializer.support.SerializationFailedException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import servicetemplate.userservice.config.property.RabbitProperty;
 import servicetemplate.userservice.data.component.UserDataComponent;
 import servicetemplate.userservice.data.dto.RegistrationDto;
+import servicetemplate.userservice.data.entity.User;
 import servicetemplate.userservice.data.model.UserModel;
 import servicetemplate.userservice.mapper.UserMapper;
 import servicetemplate.userservice.serializer.BinarySerializer;
@@ -22,6 +25,7 @@ import servicetemplate.userservice.service.UserService;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+  private final Keycloak keycloak;
   private final UserMapper userMapper;
   private final RabbitProperty rabbitProperty;
   private final RabbitTemplate rabbitTemplate;
@@ -63,7 +67,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional
   public void processRegistration(RegistrationDto registrationDto) {
-
+    User user = userDataComponent.create(userMapper.toEntity(registrationDto));
   }
 }

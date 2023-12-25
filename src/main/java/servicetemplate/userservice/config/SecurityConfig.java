@@ -1,5 +1,7 @@
 package servicetemplate.userservice.config;
 
+import static org.springframework.http.HttpMethod.POST;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +18,10 @@ public class SecurityConfig {
     return http.securityMatcher("/**")
         .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
             .permitAll()
+
+            .requestMatchers(POST, "/user")
+            .permitAll()
+
             .anyRequest()
             .authenticated())
         .csrf(AbstractHttpConfigurer::disable)
