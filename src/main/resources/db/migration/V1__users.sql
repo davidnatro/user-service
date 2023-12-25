@@ -1,0 +1,11 @@
+CREATE SCHEMA IF NOT EXISTS user_service;
+
+CREATE TABLE IF NOT EXISTS user_service.users (
+    id         BIGSERIAL PRIMARY KEY,
+    username   VARCHAR(255) UNIQUE      NOT NULL,
+    email      VARCHAR(255) UNIQUE      NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx__users_username ON user_service.users (username);

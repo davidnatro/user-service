@@ -1,6 +1,7 @@
 package servicetemplate.userservice.mapper;
 
 import org.mapstruct.Mapper;
+import servicetemplate.userservice.data.dto.RegistrationDto;
 import servicetemplate.userservice.data.entity.User;
 import servicetemplate.userservice.data.model.UserModel;
 
@@ -8,4 +9,6 @@ import servicetemplate.userservice.data.model.UserModel;
 public interface UserMapper {
 
   UserModel toModel(User user);
+
+  User toEntity(RegistrationDto registrationDto);
 }

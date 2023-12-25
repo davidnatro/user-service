@@ -31,7 +31,7 @@ services:
   #      - postgres
   rabbit:
     container_name: rabbit
-    image: rabbitmq
+    image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
