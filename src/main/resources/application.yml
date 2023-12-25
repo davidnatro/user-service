@@ -6,6 +6,31 @@ server:
 spring:
   application:
     name: user-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: postgres
+    hikari:
+      schema: user_service
+      minimum-idle: 1
+      maximum-pool-size: 2
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    default-schema: ${spring.datasource.hikari.schema}
+    table: user_service_schema_history
+  rabbitmq:
+    host: localhost
+    username: rabbit
+    password: rabbit
+    port: 5672
+    virtual-host: vh
+    exchange: user-service
+    prefetch-count: 1
+    consumers-per-queue: 5
+    registration-requests-queue: registration-requests
   mail:
     host: smtp.gmail.com
     port: 587
@@ -16,6 +41,10 @@ spring:
           auth: true
           starttls:
             enable: true
+
+application:
+  keycloak:
+
 
 
 management:
